@@ -9,4 +9,8 @@ public class Guerrero extends Personaje {
     public int atacar() {
         return ataque + 5;
     }
+
+    protected int habilidadEspecial() {
+        return ataque + 20;
+    }
 }

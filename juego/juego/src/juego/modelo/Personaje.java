@@ -7,25 +7,32 @@ public abstract class Personaje {
     protected int ataque;
     protected int defensa;
     protected int nivel;
-    protected String tipo; 
+    protected String tipo;
+    protected int energia;
+    protected int maxEnergia = 100;
+    protected int cooldown = 0;
 
     public Personaje(String nombre, int vida, int ataque, int defensa, int nivel, String tipo) {
         this.nombre = nombre;
         this.vida = vida;
         this.ataque = ataque;
         this.defensa = defensa;
-        this.nivel = nivel;
+        this.nivel = (int) (Math.random() * 100) + 1;
         this.tipo = tipo;
+        this.energia = maxEnergia;
     }
 
     public abstract int atacar();
 
     public void defender(int danio) {
         int danioFinal = danio - defensa;
-        if (danioFinal < 0){
+        if (danioFinal < 0) {
             danioFinal = 0;
         }
         vida -= danioFinal;
+        if (vida < 0) {
+            vida = 0;
+        }
     }
 
     public void subirNivel() {
@@ -35,25 +42,75 @@ public abstract class Personaje {
         defensa += 2;
     }
 
-    public String getNombre() { 
-        return nombre; 
+    public int usarHabilidadEspecial() throws Exception {
+        if (energia < 20) {
+            throw new Exception(nombre + " no tiene suficiente energia");
+        }
+        if (cooldown > 0) {
+            throw new Exception(nombre + " habilidad en cooldown");
+        }
+
+        energia -= 20;
+        cooldown = 2;
+
+        return habilidadEspecial();
     }
-    public int getVida() { 
-        return vida; 
+
+    protected abstract int habilidadEspecial();
+
+    public void reducirCooldown() {
+        if (cooldown > 0) {
+            cooldown--;
+        }
     }
-    public int getNivel() { 
-        return nivel; 
+
+    public String getNombre() {
+        return nombre;
     }
-    public String getTipo() { 
-        return tipo; 
+
+    public int getVida() {
+        return vida;
+    }
+
+    public int getNivel() {
+        return nivel;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public int getCooldown() {
+        return cooldown;
+    }
+
+    public int getEnergia() {
+        return energia;
     }
 
     @Override
     public String toString() {
-        return nombre + " [" + tipo + "]" +
-               " | Vida: " + vida +
-               " | Nivel: " + nivel +
-               " | Ataque: " + ataque +
-               " | Defensa: " + defensa;
+        return nombre + " [" + tipo + "]"
+                + " | Vida: " + vida
+                + " | Nivel: " + nivel
+                + " | Ataque: " + ataque
+                + " | Defensa: " + defensa
+                + " | Energia: " + energia
+                + " | Cooldown: " + cooldown;
     }
+
+    public void resetearEstado() {
+
+        // Restaurar vida según tipo
+        if (tipo.equals("Guerrero")) {
+            vida = 100;
+        } else if (tipo.equals("Mago")) {
+            vida = 80;
+        } else if (tipo.equals("Arquero")) {
+            vida = 90;
+        }
+        energia = maxEnergia;
+        cooldown = 0;
+    }
+
 }
