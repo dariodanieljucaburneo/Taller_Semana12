@@ -26,7 +26,9 @@ public class ControladorJuego {
 
         for (int i = 1; i <= 3; i++) {
 
-            System.out.println("\n========== COMBATE " + i + " ==========");
+            System.out.println("\n=======================================");
+            System.out.println("==========    COMBATE " + i + "    ==========");
+            System.out.println("=======================================");
 
             Personaje p1, p2;
 
@@ -35,12 +37,18 @@ public class ControladorJuego {
                 p2 = personajes[rand.nextInt(personajes.length)];
             } while (p1 == p2); 
 
+            // Forzamos un estado inicial en el primer combate para la demostración docente
+            if (i == 1) {
+                p1.agregarEstado(new Envenenado(2));
+                p2.agregarEstado(new Congelado(1));
+            }
+
             Personaje ganador = combate.pelear(p1, p2);
 
             if (ganador == null) {
-                System.out.println("RESULTADO: EMPATE");
+                System.out.println("\nRESULTADO FINAL: EMPATE");
             } else {
-                System.out.println("GANADOR: " + ganador.getNombre());
+                System.out.println("\nRESULTADO FINAL: GANADOR -> " + ganador.getNombre() + " (Ahora es Nivel " + ganador.getNivel() + ")");
             }
         }
     }
