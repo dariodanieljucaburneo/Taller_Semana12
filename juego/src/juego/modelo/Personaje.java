@@ -7,21 +7,23 @@ public abstract class Personaje {
     protected int ataque;
     protected int defensa;
     protected int nivel;
-    protected String tipo; 
+    protected String tipo;
+    protected Objeto obj;
 
-    public Personaje(String nombre, int vida, int ataque, int defensa, int nivel, String tipo) {
+    public Personaje(String nombre, int vida, int ataque, int defensa, int nivel, String tipo, Objeto obj) {
         this.nombre = nombre;
         this.vida = vida;
-        this.ataque = ataque;
-        this.defensa = defensa;
+        this.ataque = (ataque + obj.getAtq());
+        this.defensa = (defensa + obj.getDef());
         this.nivel = nivel;
         this.tipo = tipo;
+        this.obj = obj;
     }
 
     public abstract int atacar();
 
     public void defender(int danio) {
-        int danioFinal = danio - defensa;
+        int danioFinal = danio - defensa - obj.getDef();
         if (danioFinal < 0){
             danioFinal = 0;
         }
@@ -54,6 +56,7 @@ public abstract class Personaje {
                " | Vida: " + vida +
                " | Nivel: " + nivel +
                " | Ataque: " + ataque +
-               " | Defensa: " + defensa;
+               " | Defensa: " + defensa + 
+               " | Objeto: " + obj.getNombre();
     }
 }
