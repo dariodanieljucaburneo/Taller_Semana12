@@ -33,7 +33,10 @@ public class ControladorJuego {
             do {
                 p1 = personajes[rand.nextInt(personajes.length)];
                 p2 = personajes[rand.nextInt(personajes.length)];
-            } while (p1 == p2); 
+            } while (p1 == p2);
+
+            p1.resetearEstado();
+            p2.resetearEstado();
 
             Personaje ganador = combate.pelear(p1, p2);
 
