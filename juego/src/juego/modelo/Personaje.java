@@ -8,25 +8,42 @@ public abstract class Personaje {
     protected int defensa;
     protected int nivel;
     protected String tipo;
+<<<<<<< HEAD:juego/juego/src/juego/modelo/Personaje.java
     protected int energia;
     protected int maxEnergia = 100;
     protected int cooldown = 0;
+=======
+    protected Objeto obj;
+>>>>>>> origin/main:juego/src/juego/modelo/Personaje.java
 
-    public Personaje(String nombre, int vida, int ataque, int defensa, int nivel, String tipo) {
+    public Personaje(String nombre, int vida, int ataque, int defensa, int nivel, String tipo, Objeto obj) {
         this.nombre = nombre;
         this.vida = vida;
+<<<<<<< HEAD:juego/juego/src/juego/modelo/Personaje.java
         this.ataque = ataque;
         this.defensa = defensa;
         this.nivel = (int) (Math.random() * 100) + 1;
         this.tipo = tipo;
         this.energia = maxEnergia;
+=======
+        this.ataque = (ataque + obj.getAtq());
+        this.defensa = (defensa + obj.getDef());
+        this.nivel = nivel;
+        this.tipo = tipo;
+        this.obj = obj;
+>>>>>>> origin/main:juego/src/juego/modelo/Personaje.java
     }
 
     public abstract int atacar();
 
     public void defender(int danio) {
+<<<<<<< HEAD:juego/juego/src/juego/modelo/Personaje.java
         int danioFinal = danio - defensa;
         if (danioFinal < 0) {
+=======
+        int danioFinal = danio - defensa - obj.getDef();
+        if (danioFinal < 0){
+>>>>>>> origin/main:juego/src/juego/modelo/Personaje.java
             danioFinal = 0;
         }
         vida -= danioFinal;
@@ -90,6 +107,7 @@ public abstract class Personaje {
 
     @Override
     public String toString() {
+<<<<<<< HEAD:juego/juego/src/juego/modelo/Personaje.java
         return nombre + " [" + tipo + "]"
                 + " | Vida: " + vida
                 + " | Nivel: " + nivel
@@ -97,6 +115,14 @@ public abstract class Personaje {
                 + " | Defensa: " + defensa
                 + " | Energia: " + energia
                 + " | Cooldown: " + cooldown;
+=======
+        return nombre + " [" + tipo + "]" +
+               " | Vida: " + vida +
+               " | Nivel: " + nivel +
+               " | Ataque: " + ataque +
+               " | Defensa: " + defensa + 
+               " | Objeto: " + obj.getNombre();
+>>>>>>> origin/main:juego/src/juego/modelo/Personaje.java
     }
 
     public void resetearEstado() {
