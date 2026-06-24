@@ -1,0 +1,9 @@
+
+package juego.modelo;
+
+public class Arma extends Objeto {
+
+    public Arma(String nombre, int atq) {
+        super(nombre, atq, 0);
+    }
+}

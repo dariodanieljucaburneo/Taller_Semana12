@@ -9,4 +9,8 @@ public class Arquero extends Personaje {
     public int atacar() {
         return ataque + 7;
     }
+
+    protected int habilidadEspecial() {
+        return ataque + 25;
+    }
 }

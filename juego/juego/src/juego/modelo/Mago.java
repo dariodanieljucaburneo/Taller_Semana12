@@ -9,4 +9,8 @@ public class Mago extends Personaje {
     public int atacar() {
         return ataque + 10;
     }
+
+    protected int habilidadEspecial() {
+        return ataque + 30; 
+    }
 }
